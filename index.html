@@ -13,8 +13,31 @@
 
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-<script>
+<!-- BABEL 변환기 추가 -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- BABEL type 지정해주기 -->
+<script type="text/babel">
     const root = document.getElementById("root");
+    const title = (
+        <h3 id="title" 
+            onMouseEnter={() => console.log('mouse enter')}
+        >
+            Hello I'm a title
+        </h3>
+    );
+
+    const button = (
+        <button 
+            onClick = {() => console.log('im clicked')} 
+            style = {{backgroundColor: "tomato",}}
+        >
+            Click me!
+        </button>
+    )
+
+
+    /* 기존방법
     const h3 = React.createElement(
         // html 태그명 쓰기
         "h3", 
@@ -24,7 +47,7 @@
         }, 
         // 태그 내부에 들어갈 content 작성
         "Hello I am a span"); 
-
+    
     const btn = React.createElement(
         // html 태그명 쓰기
         "button", 
@@ -37,9 +60,10 @@
         },
         // 태그 내부에 들어갈 content 작성
         "Click me");
-    
+    */
+
     // div 내부에 넣을 element들을 배열 안에 저장해서 넣기
-    const container = React.createElement("div", null, [h3, btn]);
+    const container = React.createElement("div", null, [title, button]);
     ReactDOM.render(container, root)
     
 </script>
