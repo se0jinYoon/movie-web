@@ -19,7 +19,10 @@
 <!-- BABEL type 지정해주기 -->
 <script type="text/babel">
     const root = document.getElementById("root");
-    const title = (
+
+    // component 변수명은 무조건 대문자!!
+    // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
+    const Title = () => (
         <h3 id="title" 
             onMouseEnter={() => console.log('mouse enter')}
         >
@@ -27,7 +30,7 @@
         </h3>
     );
 
-    const button = (
+    const Button = () => (
         <button 
             onClick = {() => console.log('im clicked')} 
             style = {{backgroundColor: "tomato",}}
@@ -36,35 +39,19 @@
         </button>
     )
 
+    // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
+    const Container = () => (
+        <div>
+            <Title /> 
+            <Button />
+        </div>
+    );
 
-    /* 기존방법
-    const h3 = React.createElement(
-        // html 태그명 쓰기
-        "h3", 
-        {
-        // event 생성
-        onMouseEnter : () => console.log('mouse enter'),
-        }, 
-        // 태그 내부에 들어갈 content 작성
-        "Hello I am a span"); 
-    
-    const btn = React.createElement(
-        // html 태그명 쓰기
-        "button", 
-        // event 생성
-        {
-         onClick : () => console.log('im clicked'),
-         style: {
-            backgroundColor: "tomato",
-         }
-        },
-        // 태그 내부에 들어갈 content 작성
-        "Click me");
-    */
+    // render 전달 시 element로 구현되어 있는 경우
+    // ReactDOM.render(Container, root);
 
-    // div 내부에 넣을 element들을 배열 안에 저장해서 넣기
-    const container = React.createElement("div", null, [title, button]);
-    ReactDOM.render(container, root)
+    // render 전달 시 component(함수형)로 구현되어 있는 경우
+    ReactDOM.render(<Container />, root)
     
 </script>
 </html>
