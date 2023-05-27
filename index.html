@@ -20,38 +20,27 @@
 <script type="text/babel">
     const root = document.getElementById("root");
 
-    // component 변수명은 무조건 대문자!!
-    // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
-    const Title = () => (
-        <h3 id="title" 
-            onMouseEnter={() => console.log('mouse enter')}
-        >
-            Hello I'm a title
-        </h3>
-    );
+    let counter = 0;
+    function countUp() {
+        counter += 1;
+        // 함수 호출할 때 마다 Render 다시 해주기
+        render();
+    }
 
-    const Button = () => (
-        <button 
-            onClick = {() => console.log('im clicked')} 
-            style = {{backgroundColor: "tomato",}}
-        >
-            Click me!
-        </button>
-    )
+    // render하는 function 만들가
+    function render() {
+        ReactDOM.ernder(<Container />, root);
+    }
 
     // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
     const Container = () => (
         <div>
-            <Title /> 
-            <Button />
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={countUp}>Click me!</button>
         </div>
     );
 
-    // render 전달 시 element로 구현되어 있는 경우
-    // ReactDOM.render(Container, root);
-
-    // render 전달 시 component(함수형)로 구현되어 있는 경우
-    ReactDOM.render(<Container />, root)
+    render();
     
 </script>
 </html>
