@@ -19,28 +19,22 @@
 <!-- BABEL type 지정해주기 -->
 <script type="text/babel">
     const root = document.getElementById("root");
-
-    let counter = 0;
-    function countUp() {
-        counter += 1;
-        // 함수 호출할 때 마다 Render 다시 해주기
-        render();
-    }
-
-    // render하는 function 만들가
-    function render() {
-        ReactDOM.ernder(<Container />, root);
-    }
+    
 
     // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
-    const Container = () => (
-        <div>
-            <h3>Total clicks: {counter}</h3>
-            <button onClick={countUp}>Click me!</button>
-        </div>
-    );
+    function App() {
+        // data값 초기화 가능
+        const [counter, modifier] = React.useState(0);
 
-    render();
+        return (
+        <div>
+            <h3>Total clicks: 0</h3>
+            <button>Click me!</button>
+        </div>
+        );
+    }
+
+    ReactDOM.render(<App />, root);
     
 </script>
 </html>
