@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!-- reactDOM이 태그를 위치시킬 곳 기준으로 보통 root를 써둠 -->
     <div id="root"></div>
@@ -23,13 +24,21 @@
 
     // Container안에 넣기 위해서는 element들을 함수(component)로 만들어야 함
     function App() {
-        // data값 초기화 가능
-        const [counter, modifier] = React.useState(0);
+        // data값 초기화 가능 (구조분해할당)
+        // counter = data값
+        // setCounter = 함수
+        const [counter, setCounter] = React.useState(0);
+
+        // setCounter에 넣는 값에 따라 counter의 값이 바뀐다
+        // setCounter를 호출하면 자동으로 re-rendering된다
+        const onClick = () => {
+            setCounter(counter + 1);
+        };
 
         return (
         <div>
-            <h3>Total clicks: 0</h3>
-            <button>Click me!</button>
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={onClick}>Click me!</button>
         </div>
         );
     }
