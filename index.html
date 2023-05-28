@@ -19,25 +19,39 @@
 
 <!-- BABEL type 지정해주기 -->
 <script type="text/babel">
-    function Btn({text, big}) {
-        console.log(text, big)
-        return <button style={{
-            backgroundColor : "tomato",
-            color: "white",
-            padding: "10px 20px",
-            border: 0,
-            borderRadius: 10,
-            fontSize: big ? 18 : 16,
+    function Btn({text, changeValue}) {
+        return (
+            <button 
+                // component를 쓸 때 props로 넘긴 함수를 받아서 onClick에 적용시켜주는 방법
+                onClick = {changeValue}
+                style={{
+                    backgroundColor : "tomato",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 10,
         }}>
             {text}
-        </button>;
+        </button>);
     }
+    // props가 변경되지 않는 한 component를 re-rendering하는 것을 막을 수 있음
+    const MemorizedBtn = React.memo(Btn)
     
     function App() {
+        // 부모 component (app)의 상태를 바꾸는 함수
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
         return (
             <div>
-                <Btn text = "Save Changes" big = {true} />
-                <Btn text = "Continue" big = {false}/>
+                {/* 이때 넣는 onClick은 eventListener가 아니라 그냥 prop임!!
+                    html 태그 예를들어 <button onClick = {onClick} />일 경우 eventListner임! 
+                    style을 적용하려는 경우도 여기서 적용하면 안되고, props로 넘겨서 html 태그 안에서 적용시켜야 함
+                    근데 실행은 자식이 시킴 
+                    app component의 state가 변했기 때문에 이 div는 re-render할 때마다 새로 생성됨
+                    continue 버튼은 바뀌는 값이 없음에도 계속 생성됨*/}
+                <MemorizedBtn text = {value} changeValue = {changeValue}/>
+                {/*props가 변경되지 않는 한 component를 re-rendering하는 것을 막을 수 있음*/}
+                <MemorizedBtn text = "Continue" />
             </div>
         );
     }
