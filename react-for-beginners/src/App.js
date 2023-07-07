@@ -14,7 +14,7 @@ function App() {
       {/* Switch는 Route(URL)를 찾아주는 역할을 하고 찾으면 component를 render한다 */}
       <Switch>
         {/* movie 디테일로 가는 route */}
-        <Route path="/movie">
+        <Route path="/movie/:id">
           <Detail />
         </Route>
 
