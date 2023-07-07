@@ -16,7 +16,6 @@ function App () {
 
     setToDo(""); 
   };
-  console.log(toDos);
   
 
   return (
@@ -31,6 +30,13 @@ function App () {
         />
         <button>Add To Do</button>
       </form>   
+      <hr />
+      {/* toDos의 element들을 component로 만들기 */}
+      <ul>
+        {toDos.map((item, index) => ( 
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
   </div>
   )
 }
