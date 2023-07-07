@@ -1,37 +1,30 @@
-import { useState, useEffect } from "react";
+// url에 따라 어떤 페이지를 보여줄지 정해주는 부분
+
+import {BrowserRouter as Router,
+        Switch,
+        Route,
+        Link,
+        } from "react-router-dom";
+import Home from "./route/Home";
+import Detail from "./route/Detail";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  
-  // API 불러와서 Json parsing하기
-  const getMovies = async() => {
-    const response = await fetch(`https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`);
-    const json = await response.json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  }
-  useEffect(() => {
-    getMovies()
-  },[])
-
-
   return (
-    <div>
-      {loading? <h1>Loading...</h1> : 
-                <div>
-                  {movies.map((movie) => (
-                    <div key={movie.id}>
-                      <img src={movie.medium_cover_image}></img>
-                      <h2>{movie.title}</h2>
-                      <p>{movie.summary}</p>
-                      <ul>
-                        {movie.genres.map(g => <li key={g}>{g}</li>)}
-                      </ul>
-                    </div>
-                  ))}
-                </div> }
-    </div>
+    <Router>
+      {/* Switch는 Route(URL)를 찾아주는 역할을 하고 찾으면 component를 render한다 */}
+      <Switch>
+        {/* movie 디테일로 가는 route */}
+        <Route path="/movie">
+          <Detail />
+        </Route>
+
+        {/* home으로 가는 route */}
+        <Route path="/">
+          <Home />
+        </Route>
+
+      </Switch>
+    </Router>
   )
 }
 
