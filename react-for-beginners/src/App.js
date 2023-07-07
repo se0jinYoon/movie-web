@@ -17,7 +17,6 @@ function App() {
         <Route path="/movie/:id">
           <Detail />
         </Route>
-
         {/* home으로 가는 route */}
         <Route path="/">
           <Home />
@@ -25,7 +24,7 @@ function App() {
 
       </Switch>
     </Router>
-  )
+  ) 
 }
 
 export default App 
