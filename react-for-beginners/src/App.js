@@ -1,21 +1,38 @@
 import {useState, useEffect} from "react";
 
-function Hello() {
-  useEffect(() => {
-    console.log("created :)");
-    return () => console.log("destroyed :( ")
-  }, [])
-  return <h1>Hello</h1>
-}
- 
-function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
-  return (
-  <div>
-    {showing ? <Hello /> : null}
-    <button onClick = {onClick}>{showing? "Hide" : "Show"}</button>
-  </div>)
+function App () {
+  const [toDo, setToDo] = useState("");
+  // application이 시작할 때 toDos = []
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") return;
     
-} 
+    // 첫 번째 toDo를 입력하면 현재 toDos에 저장된 값([])을 currentArray로 불러오고
+    // input을 통해 지금 작성한 toDo와 현재 toDos의 값을 합쳐서 새로운 array로 set해준다
+    setToDos((currentArray) => [toDo, ...currentArray]);
+
+    setToDo(""); 
+  };
+  console.log(toDos);
+  
+
+  return (
+  <div> 
+    <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit = {onSubmit}>
+        <input 
+          onChange={onChange} 
+          value={toDo} 
+          type="text" 
+          placeholder="Write your to do..." 
+        />
+        <button>Add To Do</button>
+      </form>   
+  </div>
+  )
+}
+
 export default App;
