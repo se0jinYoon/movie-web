@@ -1,0 +1,16 @@
+.movie_el_box {
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem;
+    margin-bottom: 3rem; 
+    background-color: beige;
+}
+
+.movie_el_img {
+    margin-right: 1.5rem;
+}
+
+.info_box {
+    display: flex;
+    flex-direction: column;
+}
